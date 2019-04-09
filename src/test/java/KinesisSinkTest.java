@@ -1,5 +1,5 @@
 /*
- * Copyright © 2016 Cask Data, Inc.
+ * Copyright © 2019 CDAP
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,20 +14,20 @@
  * the License.
  */
 
-import co.cask.cdap.api.data.schema.Schema;
-import co.cask.cdap.datapipeline.SmartWorkflow;
-import co.cask.cdap.etl.api.batch.BatchSink;
-import co.cask.cdap.etl.mock.batch.MockSource;
-import co.cask.cdap.etl.proto.v2.ETLBatchConfig;
-import co.cask.cdap.etl.proto.v2.ETLPlugin;
-import co.cask.cdap.etl.proto.v2.ETLStage;
-import co.cask.cdap.proto.ProgramRunStatus;
-import co.cask.cdap.proto.artifact.AppRequest;
-import co.cask.cdap.proto.id.ApplicationId;
-import co.cask.cdap.proto.id.NamespaceId;
-import co.cask.cdap.test.ApplicationManager;
-import co.cask.cdap.test.WorkflowManager;
-import co.cask.hydrator.plugin.batch.Properties;
+import io.cdap.cdap.api.data.schema.Schema;
+import io.cdap.cdap.datapipeline.SmartWorkflow;
+import io.cdap.cdap.etl.api.batch.BatchSink;
+import io.cdap.cdap.etl.mock.batch.MockSource;
+import io.cdap.cdap.etl.proto.v2.ETLBatchConfig;
+import io.cdap.cdap.etl.proto.v2.ETLPlugin;
+import io.cdap.cdap.etl.proto.v2.ETLStage;
+import io.cdap.cdap.proto.ProgramRunStatus;
+import io.cdap.cdap.proto.artifact.AppRequest;
+import io.cdap.cdap.proto.id.ApplicationId;
+import io.cdap.cdap.proto.id.NamespaceId;
+import io.cdap.cdap.test.ApplicationManager;
+import io.cdap.cdap.test.WorkflowManager;
+import io.cdap.plugin.batch.Properties;
 import org.junit.Assert;
 import org.junit.Test;
 
