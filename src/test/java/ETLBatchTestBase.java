@@ -1,5 +1,5 @@
 /*
- * Copyright © 2015 Cask Data, Inc.
+ * Copyright © 2019 CDAP
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,17 +14,17 @@
  * the License.
  */
 
-import co.cask.cdap.api.artifact.ArtifactRange;
-import co.cask.cdap.api.artifact.ArtifactSummary;
-import co.cask.cdap.api.artifact.ArtifactVersion;
-import co.cask.cdap.datapipeline.DataPipelineApp;
-import co.cask.cdap.etl.mock.test.HydratorTestBase;
-import co.cask.cdap.proto.id.ArtifactId;
-import co.cask.cdap.proto.id.NamespaceId;
-import co.cask.cdap.test.TestConfiguration;
-import co.cask.hydrator.plugin.batch.KinesisOutputFormat;
-import co.cask.hydrator.plugin.batch.KinesisSink;
 import com.google.common.collect.ImmutableSet;
+import io.cdap.cdap.api.artifact.ArtifactRange;
+import io.cdap.cdap.api.artifact.ArtifactSummary;
+import io.cdap.cdap.api.artifact.ArtifactVersion;
+import io.cdap.cdap.datapipeline.DataPipelineApp;
+import io.cdap.cdap.etl.mock.test.HydratorTestBase;
+import io.cdap.cdap.proto.id.ArtifactId;
+import io.cdap.cdap.proto.id.NamespaceId;
+import io.cdap.cdap.test.TestConfiguration;
+import io.cdap.plugin.batch.KinesisOutputFormat;
+import io.cdap.plugin.batch.KinesisSink;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 

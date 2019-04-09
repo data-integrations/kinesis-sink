@@ -9,7 +9,7 @@ Use Case
 --------
 This sink is used when you want to write to a kinesis stream.
 
-co.cask.hydrator.plugin.batch.Properties
+io.cdap.plugin.batch.Properties
 ----------
 **name:** The name of the kinesis stream to output to. Must be a valid kinesis stream name. The kinesis stream will be
 created if it does not exist.
