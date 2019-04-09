@@ -82,7 +82,7 @@ public class KinesisSinkTest extends ETLBatchTestBase {
 
     WorkflowManager workflowManager = appManager.getWorkflowManager(SmartWorkflow.NAME);
     workflowManager.start();
-    workflowManager.waitForFinish(5, TimeUnit.MINUTES);
+    workflowManager.waitForRun(ProgramRunStatus.COMPLETED, 5, TimeUnit.MINUTES);
     Assert.assertEquals(workflowManager.getHistory().size(), 1);
     Assert.assertEquals(workflowManager.getHistory().get(0).getStatus(), ProgramRunStatus.FAILED);
   }
