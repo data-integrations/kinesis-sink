@@ -29,6 +29,7 @@ import io.cdap.cdap.api.data.format.StructuredRecord;
 import io.cdap.cdap.api.data.schema.Schema;
 import io.cdap.cdap.api.dataset.lib.KeyValue;
 import io.cdap.cdap.etl.api.Emitter;
+import io.cdap.cdap.etl.api.FailureCollector;
 import io.cdap.cdap.etl.api.PipelineConfigurer;
 import io.cdap.cdap.etl.api.batch.BatchSink;
 import io.cdap.cdap.etl.api.batch.BatchSinkContext;
@@ -64,16 +65,14 @@ public class KinesisSink extends ReferenceBatchSink<StructuredRecord, NullWritab
   @Override
   public void configurePipeline(PipelineConfigurer pipelineConfigurer) {
     super.configurePipeline(pipelineConfigurer);
-    Preconditions.checkArgument(!Strings.isNullOrEmpty(config.name),
-                                "Stream name should be non-null, non-empty.");
-    Preconditions.checkArgument(!Strings.isNullOrEmpty(config.awsAccessKey),
-                                "Access Key should be non-null, non-empty.");
-    Preconditions.checkArgument(!Strings.isNullOrEmpty(config.awsAccessSecret),
-                                "Access Key secret should be non-null, non-empty.");
+    config.validate(pipelineConfigurer.getStageConfigurer().getFailureCollector());
   }
 
   @Override
   public void prepareRun(BatchSinkContext batchSinkContext) throws Exception {
+    FailureCollector collector = batchSinkContext.getFailureCollector();
+    config.validate(collector);
+    collector.getOrThrowException();
     batchSinkContext.addOutput(Output.of(config.referenceName, new KinesisOutputFormatProvider(config)));
   }
 
@@ -161,5 +160,19 @@ public class KinesisSink extends ReferenceBatchSink<StructuredRecord, NullWritab
       return Boolean.toString(Boolean.parseBoolean(distribute));
     }
 
+    private void validate(FailureCollector collector) {
+      if (Strings.isNullOrEmpty(name)) {
+        collector.addFailure("Stream name should be non-null, non-empty.", null)
+          .withConfigProperty(Properties.KinesisSink.NAME);
+      }
+      if (!containsMacro(Properties.KinesisSink.ACCESS_ID) && Strings.isNullOrEmpty(awsAccessKey)) {
+        collector.addFailure("Access Key should be non-null, non-empty.", null)
+          .withConfigProperty(Properties.KinesisSink.ACCESS_ID);
+      }
+      if (!containsMacro(Properties.KinesisSink.ACCESS_KEY) && Strings.isNullOrEmpty(awsAccessSecret)) {
+        collector.addFailure("Access Key secret should be non-null, non-empty.", null)
+          .withConfigProperty(Properties.KinesisSink.ACCESS_KEY);
+      }
+    }
   }
 }

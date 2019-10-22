@@ -78,14 +78,14 @@
   </repositories>
 
   <properties>
-    <cdap.version>6.0.0-SNAPSHOT</cdap.version>
+    <cdap.version>6.1.0-SNAPSHOT</cdap.version>
     <hadoop.version>2.3.0</hadoop.version>
     <junit.version>4.11</junit.version>
-    <hydrator.version>2.2.0-SNAPSHOT</hydrator.version>
+    <hydrator.version>2.3.0-SNAPSHOT</hydrator.version>
     <widgets.dir>widgets</widgets.dir>
     <docs.dir>docs</docs.dir>
     <app.parents>
-      system:cdap-etl-batch[6.0.0-SNAPSHOT,7.0.0-SNAPSHOT),system:cdap-etl-realtime[6.0.0-SNAPSHOT,7.0.0-SNAPSHOT),system:cdap-data-pipeline[6.0.0-SNAPSHOT,7.0.0-SNAPSHOT),system:cdap-data-streams[6.0.0-SNAPSHOT,7.0.0-SNAPSHOT)
+      system:cdap-data-pipeline[6.1.0-SNAPSHOT,7.0.0-SNAPSHOT),system:cdap-data-streams[6.1.0-SNAPSHOT,7.0.0-SNAPSHOT)
     </app.parents>
     <!-- this is here because project.basedir evaluates to null in the script build step -->
     <main.basedir>${project.basedir}</main.basedir>
