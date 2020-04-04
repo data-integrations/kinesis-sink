@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 /**
@@ -74,6 +75,13 @@ public class KinesisSink extends ReferenceBatchSink<StructuredRecord, NullWritab
     config.validate(collector);
     collector.getOrThrowException();
     batchSinkContext.addOutput(Output.of(config.referenceName, new KinesisOutputFormatProvider(config)));
+
+    Schema schema = batchSinkContext.getInputSchema();
+    if (schema != null && schema.getFields() != null) {
+      recordLineage(batchSinkContext, config.referenceName, schema,
+                    schema.getFields().stream().map(Schema.Field::getName).collect(Collectors.toList()),
+                    "Write", "Wrote to Kinesis Stream");
+    }
   }
 
   @Override
