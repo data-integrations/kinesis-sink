@@ -17,7 +17,6 @@
 package io.cdap.plugin.batch;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import io.cdap.cdap.api.annotation.Description;
 import io.cdap.cdap.api.annotation.Macro;
@@ -74,6 +73,11 @@ public class KinesisSink extends ReferenceBatchSink<StructuredRecord, NullWritab
     config.validate(collector);
     collector.getOrThrowException();
     batchSinkContext.addOutput(Output.of(config.referenceName, new KinesisOutputFormatProvider(config)));
+
+    Schema schema = batchSinkContext.getInputSchema();
+    if (schema != null && schema.getFields() != null) {
+      recordLineage(batchSinkContext, config.referenceName, schema, "Write", "Wrote to Kinesis Stream");
+    }
   }
 
   @Override
