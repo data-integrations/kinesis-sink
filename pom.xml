@@ -78,7 +78,7 @@
   </repositories>
 
   <properties>
-    <cdap.version>6.1.0-SNAPSHOT</cdap.version>
+    <cdap.version>6.2.0-SNAPSHOT</cdap.version>
     <hadoop.version>2.3.0</hadoop.version>
     <junit.version>4.11</junit.version>
     <hydrator.version>2.4.0-SNAPSHOT</hydrator.version>
